@@ -13,12 +13,12 @@ def login(request):
 #MODIFICACION
 def home(request):
     contexto = {
-        'canciones' : []
+        'Clientes' : []
     }
     try:
-        response = requests.get(endpoint + 'canciones') # http://127.0.0.1:5000/canciones
+        response = requests.get(endpoint + 'Clientes') # http://127.0.0.1:5000/canciones
         canciones=response.json()
-        contexto['canciones']=canciones
+        contexto['Clientes']=canciones
     except:
         print('Error en la API')
     return render(request, 'home.html', contexto)
@@ -63,7 +63,7 @@ def cargaMasiva(request):
             xml_binary = f.read()
             xml = xml_binary.decode('utf-8')
             ctx['content'] = xml
-            response = requests.post(endpoint + 'agregarCanciones', data=xml_binary)
+            response = requests.post(endpoint + 'contenido', data=xml_binary)
             if response.ok:
                 ctx['response'] = 'Archivo XML cargado corrrectamente'
             else:

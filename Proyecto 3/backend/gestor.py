@@ -1,12 +1,12 @@
 from usuario import Usuario
 from cancion import Cancion
+from Clientes import Clientes
 import json
 
 class Gestor:
     def __init__(self):
         self.usuarios=[]
-        self.canciones=[]
-        self.recurso=[]
+        self.cliente=[]
         self.usuarios.append(Usuario('Jacky','Benitez','admin','admin'))
         self.usuarios.append(Usuario('Kirby','SuperStar','kirby','kirby'))
     
@@ -19,19 +19,21 @@ class Gestor:
                 return x
         return None
     
-    def agregar_cancion(self,recurso):
-        self.recurso.append(recurso)
+    def agregar_cancion(self,nit,nombre4,usuario,clave,direccion,correo):
+        self.cliente.append(Clientes(nit,nombre4,usuario,clave,direccion,correo))
         return True
     
     def obtener_canciones(self):
         json=[]
-        for i in self.recurso:
-            cancion={
-                'name':i.idrecurso,
-                'artist':i.nombre,
-                'image':i.abreviatura,
-                'album':i.metrica
+        for i in self.cliente:
+            Clientes={
+               'nit':i.nit,
+                'nombre':i.nombre,
+                'usuario':i.usuario,
+                'clave':i.clave,
+                'direccion':i.direccion,
+                'correo':i.correo
             }
-            json.append(cancion)
+            json.append(Clientes)
         return json
         

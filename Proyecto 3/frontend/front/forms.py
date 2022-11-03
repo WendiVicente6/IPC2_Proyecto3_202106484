@@ -9,7 +9,9 @@ class FileForm(forms.Form):
     file=forms.FileField(label="file")
 
 class AddForm(forms.Form):
-   name = forms.CharField(label="name")
-   artist = forms.CharField(label="artist")
-   image = forms.CharField(label="image")
-   album = forms.CharField(label="album") 
+   nit = forms.CharField(label="nit")
+   nombre = forms.CharField(label="nombre")
+   usuario = forms.CharField(label="usuario")
+   clave = forms.CharField(label="clave") 
+   direccion = forms.CharField(label="direccion") 
+   correo = forms.CharField(label="correo") 
