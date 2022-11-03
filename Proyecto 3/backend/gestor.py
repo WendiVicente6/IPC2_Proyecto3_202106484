@@ -31,6 +31,11 @@ class Gestor:
     def agregar_cliente(self,clientes):
         self.cliente.append(clientes)
         return True
+    def agregar_unaclientes(self,clave,correo,direccion,nit,nombre,usuario):
+        cli=Clientes(nit,nombre,usuario,clave,direccion,correo)
+        self.cliente.append(cli)
+        return True
+        
     def agregar_Recurso(self,clientes):
         self.Recurso.append(clientes)
         return True
@@ -47,6 +52,10 @@ class Gestor:
         return True
     def agregar_Configuracion(self,clientes):
         self.Configuracion.append(clientes)
+        return True
+    def agregar_unaconfi(self,descrip,id,nom):
+        cli=Configuraciones(id,nom,descrip)
+        self.Configuracion.append(cli)
         return True
     def agregar_Instancia(self,clientes):
         self.Instancia.append(clientes)

@@ -43,7 +43,16 @@ def agregarRecurso():
     json=request.get_json()
     gestor.agregar_Unre(json['abreviatura'],json['id'],json['metrica'],json['nombre'],json['tipo'],json['valor'])
     return jsonify({'ok':True, 'data':'Recurso añadida con exito'}),200
-
+@app.route('/agregarConfiguracion',methods=['POST'])
+def agregarConfi():
+    json=request.get_json()
+    gestor.agregar_unaconfi(json['descripcion'],json['id'],json['nombre'])
+    return jsonify({'ok':True, 'data':'Configuracion añadida con exito'}),200
+@app.route('/agregarClientes',methods=['POST'])
+def agregarClientes():
+    json=request.get_json()
+    gestor.agregar_unaclientes(json['clave'],json['correo'],json['direccion'],json['nit'],json['nombre'],json['usuario'])
+    return jsonify({'ok':True, 'data':'Cliente añadida con exito'}),200
 @app.route('/contenido',methods = ['POST'])
 def parseInfo():
     contarcliente=0
