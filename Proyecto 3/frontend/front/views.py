@@ -60,10 +60,9 @@ def cargaMasiva(request):
         form = FileForm(request.POST, request.FILES)
         if form.is_valid():
             f = request.FILES['file']
-            xml_binary = f.read()
-            xml = xml_binary.decode('utf-8')
-            ctx['content'] = xml
-            response = requests.post(endpoint + 'contenido', data=xml_binary)
+            ctx['content'] = f
+            response = requests.post(endpoint + 'contenido',data=f)
+            print(response.ok)
             if response.ok:
                 ctx['response'] = 'Archivo XML cargado corrrectamente'
             else:
