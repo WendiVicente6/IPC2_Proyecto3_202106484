@@ -123,6 +123,7 @@ def parseInfo():
 
 @app.route('/consumos',methods = ['POST'])
 def parseInfo2():
+    contarconsumo=0
     body = request.get_json()
     ruta = body['ruta']
     #content = read.entrada(ruta)
@@ -135,6 +136,7 @@ def parseInfo2():
 
         for configInicial in archivoconfig:
             nit=configInicial.getAttribute('nitCliente')
+            contarconsumo+=1
             idinstancia=configInicial.getAttribute('idInstancia')
             tiempo=configInicial.getElementsByTagName('tiempo')[0].childNodes[0].nodeValue
             print(tiempo)
@@ -142,7 +144,7 @@ def parseInfo2():
             temporalConfig=Consumos(nit,idinstancia,tiempo,fecha)
         
 
-    return jsonify({'data': 'Archivo de Consumos cargado'})
+    return jsonify({'data': 'Archivo de Consumos cargado',"Total Consumos":contarconsumo})
 
 #Obtener Canciones
 @app.route('/Clientes',methods=['GET'])
