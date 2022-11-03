@@ -53,6 +53,11 @@ def agregarClientes():
     json=request.get_json()
     gestor.agregar_unaclientes(json['clave'],json['correo'],json['direccion'],json['nit'],json['nombre'],json['usuario'])
     return jsonify({'ok':True, 'data':'Cliente añadida con exito'}),200
+@app.route('/agregarInstancias',methods=['POST'])
+def agregarInsta():
+    json=request.get_json()
+    gestor.agregar_unaInsta(json['Fecha_Final'],json['estado'],json['fecha_inicio'],json['id'],json['id_config'],json['nombre'])
+    return jsonify({'ok':True, 'data':'Instancia añadida con exito'}),200
 @app.route('/contenido',methods = ['POST'])
 def parseInfo():
     contarcliente=0

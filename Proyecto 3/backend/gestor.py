@@ -60,6 +60,12 @@ class Gestor:
     def agregar_Instancia(self,clientes):
         self.Instancia.append(clientes)
         return True
+
+    def agregar_unaInsta(self,final,estado,inicio,id,idconfi,nombre):
+        cli=Instancias(id,idconfi,nombre,inicio,estado,final)
+        self.Instancia.append(cli)
+        return True
+        
     
  
     def Buscar(self,tipo):
