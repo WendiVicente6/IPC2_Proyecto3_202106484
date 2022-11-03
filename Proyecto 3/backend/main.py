@@ -67,6 +67,8 @@ def parseInfo():
             tipo=configInicial.getElementsByTagName('tipo')[0].childNodes[0].nodeValue
             valor=configInicial.getElementsByTagName('valorXhora')[0].childNodes[0].nodeValue
             temporalConfig=Recurso(idrecurso,nombre1,abreviatura,metrica,tipo,valor)
+            gestor.agregar_Recurso(temporalConfig)
+            
             
     for lisca in listacatego:
         catego= lisca.getElementsByTagName('categoria')
@@ -76,7 +78,8 @@ def parseInfo():
             nombre2=categoria.getElementsByTagName('nombre')[0].childNodes[0].nodeValue
             descripcion=categoria.getElementsByTagName('descripcion')[0].childNodes[0].nodeValue
             carga=categoria.getElementsByTagName('cargaTrabajo')[0].childNodes[0].nodeValue
-            temporalConfig=Categorias(idcategoria,nombre2,descripcion,carga)
+            categoriasGu=Categorias(idcategoria,nombre2,descripcion,carga)
+            gestor.agregar_Categorias(categoriasGu)
             listaconfiguraciones=categoria.getElementsByTagName('configuracion')        
         
             for configuracion in listaconfiguraciones:
@@ -84,7 +87,8 @@ def parseInfo():
                 contarreconfi+=1
                 nombre3=configuracion.getElementsByTagName('nombre')[0].childNodes[0].nodeValue
                 descripcion=configuracion.getElementsByTagName('descripcion')[0].childNodes[0].nodeValue
-                temporalConfig=Configuraciones(idconfi,nombre3,descripcion)
+                configu=Configuraciones(idconfi,nombre3,descripcion)
+                gestor.agregar_Configuracion(configu)
                 recursosconfigurados=configuracion.getElementsByTagName('recursosConfiguracion') 
             
                 for recursos in recursosconfigurados:
@@ -92,6 +96,7 @@ def parseInfo():
                     cantidad=recursos.getElementsByTagName('recurso')[0].childNodes[0].nodeValue
 
                     temporalConfig=CantidadRecurso(idrecursoconfi,cantidad)
+
     for liscli in listaclilentes:
         listaclientes=liscli.getElementsByTagName('cliente')
         
@@ -105,8 +110,8 @@ def parseInfo():
             direccion=clientes.getElementsByTagName('direccion')[0].childNodes[0].nodeValue
             correo=clientes.getElementsByTagName('correoElectronico')[0].childNodes[0].nodeValue
 
-            
-            gestor.agregar_cancion(nit,nombre4,usuario,clave,direccion,correo)
+            clientesGu=Clientes(nit,nombre4,usuario,clave,direccion,correo)
+            gestor.agregar_cliente(clientesGu)
             listainstancia=clientes.getElementsByTagName('instancia') 
 
             for instancia in listainstancia:
@@ -117,7 +122,9 @@ def parseInfo():
                 inicio=instancia.getElementsByTagName('fechaInicio')[0].childNodes[0].nodeValue
                 estado=instancia.getElementsByTagName('estado')[0].childNodes[0].nodeValue
                 final=instancia.getElementsByTagName('fechaFinal')[0].childNodes[0].nodeValue
-                temporalConfig=Instancias(idinstancia,idconfi,nombre5,inicio,estado,final)
+                instagu=Instancias(idinstancia,idconfi,nombre5,inicio,estado,final)
+                gestor.agregar_Instancia(instagu)
+                
     
     return jsonify({'data': 'Archivo de Configuración cargado','clientes':contarcliente,'Instancias':contarinsta,"Configuraciones":contarreconfi,"Categorias":contarrecate,"Recursos":contarrecursos})
 
@@ -147,10 +154,11 @@ def parseInfo2():
     return jsonify({'data': 'Archivo de Consumos cargado',"Total Consumos":contarconsumo})
 
 #Obtener Canciones
-@app.route('/Clientes',methods=['GET'])
-def get_canciones():
-    c=gestor.obtener_canciones()
-    return jsonify(c),200
+@app.route('/Consultar',methods=['POST'])
+def registar():
+
+    dato=gestor.Buscar(request.json['Tipo'])
+    return jsonify(dato)
 
 #Iniciar el servidor
 if __name__ == "__main__":

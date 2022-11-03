@@ -7,6 +7,10 @@ class Gestor:
     def __init__(self):
         self.usuarios=[]
         self.cliente=[]
+        self.Recurso=[]
+        self.Categorias=[]
+        self.Configuracion=[]
+        self.Instancia=[]
         self.usuarios.append(Usuario('Jacky','Benitez','admin','admin'))
         self.usuarios.append(Usuario('Kirby','SuperStar','kirby','kirby'))
     
@@ -19,21 +23,83 @@ class Gestor:
                 return x
         return None
     
-    def agregar_cancion(self,nit,nombre4,usuario,clave,direccion,correo):
-        self.cliente.append(Clientes(nit,nombre4,usuario,clave,direccion,correo))
+    def agregar_cliente(self,clientes):
+        self.cliente.append(clientes)
+        return True
+    def agregar_Recurso(self,clientes):
+        self.Recurso.append(clientes)
+        return True
+    def agregar_Categorias(self,clientes):
+        self.Categorias.append(clientes)
+        return True
+    def agregar_Configuracion(self,clientes):
+        self.Configuracion.append(clientes)
+        return True
+    def agregar_Instancia(self,clientes):
+        self.Instancia.append(clientes)
         return True
     
-    def obtener_canciones(self):
+ 
+    def Buscar(self,tipo):
         json=[]
-        for i in self.cliente:
-            Clientes={
-               'nit':i.nit,
+        if tipo=='Clientes':
+            for i in self.cliente:
+                Clientes={
+                    'nit':i.nit,
+                    'nombre':i.nombre,
+                    'usuario':i.usuario,
+                    'clave':i.clave,
+                    'direccion':i.direccion,
+                    'correo':i.correo
+                }
+                json.append(Clientes)
+            return json
+
+        elif tipo=='Recursos':
+            for i in self.Recurso:
+                Recurso={
+                'id':i.idrecurso,
                 'nombre':i.nombre,
-                'usuario':i.usuario,
-                'clave':i.clave,
-                'direccion':i.direccion,
-                'correo':i.correo
-            }
-            json.append(Clientes)
-        return json
+                'abreviatura':i.abreviatura,
+                'metrica':i.metrica,
+                'tipo':i.tipo,
+                'valor':i.valor
+                }
+                json.append(Recurso)
+            return json
+
+        elif tipo=='Categorias':
+            for i in self.Categorias:
+                Cate={
+                'id':i.idcate,
+                'nombre':i.nombre,
+                'descripcion':i.descripcion,
+                'carga':i.carga
+                }
+                json.append(Cate)
+            return json
+
+        elif tipo=='Configuraciones':
+            for i in self.Configuracion:
+                Configur={
+                'id':i.idconfig,
+                'nombre':i.nombre,
+                'descripcion':i.descripcion
+                }
+                json.append(Configur)
+            return json
+
+        elif tipo=='Instancias':
+            for i in self.Instancia:
+                Insta={
+                'id':i.idinst,
+                'id_config':i.idconfig,
+                'nombre':i.nombre,
+                'fecha_inicio':i.inicio,
+                'estado':i.estado,
+                'Fecha_Final':i.final
+                }
+                json.append(Insta) 
+            return json
+
         
