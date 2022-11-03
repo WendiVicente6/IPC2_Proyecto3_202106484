@@ -32,12 +32,17 @@ def login(user=None,password=None):
     return '{"data":true}'
 
 #Agregar cancion
-@app.route('/agregarCancion',methods=['POST'])
-def agregarCancion():
+@app.route('/agregarCategorias',methods=['POST'])
+def agregarCategoria():
     json=request.get_json()
-    gestor.agregar_cancion(json['name'],json['artist'],json['image'],json['album'])
-    return jsonify({'ok':True, 'data':'Cancion añadida con exito'}),200
+    gestor.agregar_Categoria(json['carga'],json['descripcion'],json['id'],json['nombre'])
+    return jsonify({'ok':True, 'data':'Categoria añadida con exito'}),200
 
+@app.route('/agregarRecursos',methods=['POST'])
+def agregarRecurso():
+    json=request.get_json()
+    gestor.agregar_Unre(json['abreviatura'],json['id'],json['metrica'],json['nombre'],json['tipo'],json['valor'])
+    return jsonify({'ok':True, 'data':'Recurso añadida con exito'}),200
 
 @app.route('/contenido',methods = ['POST'])
 def parseInfo():

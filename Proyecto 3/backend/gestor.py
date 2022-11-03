@@ -1,6 +1,11 @@
 from usuario import Usuario
 from cancion import Cancion
 from Clientes import Clientes
+from Categorias import Categorias
+from Configuraciones import Configuraciones
+from Instancias import Instancias
+from recurso import CantidadRecurso, Recurso
+from Consumos import Consumos
 import json
 
 class Gestor:
@@ -29,8 +34,16 @@ class Gestor:
     def agregar_Recurso(self,clientes):
         self.Recurso.append(clientes)
         return True
+    def agregar_Unre(self,abre,id,metrica,nombre,tipo,valor):
+        cli=Recurso(id,nombre,abre,metrica,tipo,valor)
+        self.Recurso.append(cli)
+        return True
     def agregar_Categorias(self,clientes):
         self.Categorias.append(clientes)
+        return True
+    def agregar_Categoria(self,carga,descripcion,id,nombre):
+        cli=Categorias(id,nombre,descripcion,carga)
+        self.Categorias.append(cli)
         return True
     def agregar_Configuracion(self,clientes):
         self.Configuracion.append(clientes)
